@@ -162,16 +162,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\ArticuloController.cs" />
+    <Compile Include="Controllers\E_ArticuloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Articulo.cs" />
-    <Compile Include="Models\Categoria.cs" />
-    <Compile Include="Models\Imagen.cs" />
-    <Compile Include="Models\Marca.cs" />
+    <Compile Include="Models\E_ArticuloDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +310,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Progra-3-ACTIVIDAD-4-GRUPO-9B\Actividad3\ClassLibrary1\Datos.csproj">
+      <Project>{ba6d51cb-a032-4c1b-a9b9-7c59ca3e6980}</Project>
+      <Name>Datos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Progra-3-ACTIVIDAD-4-GRUPO-9B\Actividad3\Entidades\Entidades.csproj">
+      <Project>{b12f7843-7eea-48c7-979d-d33ec76ce7c4}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Progra-3-ACTIVIDAD-4-GRUPO-9B\Actividad3\Logica\Logica.csproj">
+      <Project>{8a2e14ce-30b6-418e-a6ca-c46cbb2066fd}</Project>
+      <Name>Logica</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
