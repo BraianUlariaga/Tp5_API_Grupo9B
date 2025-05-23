@@ -312,15 +312,15 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Progra-3-ACTIVIDAD-4-GRUPO-9B\Actividad3\ClassLibrary1\Datos.csproj">
+    <ProjectReference Include="..\ClassLibrary1\Datos.csproj">
       <Project>{ba6d51cb-a032-4c1b-a9b9-7c59ca3e6980}</Project>
       <Name>Datos</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Progra-3-ACTIVIDAD-4-GRUPO-9B\Actividad3\Entidades\Entidades.csproj">
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
       <Project>{b12f7843-7eea-48c7-979d-d33ec76ce7c4}</Project>
       <Name>Entidades</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Progra-3-ACTIVIDAD-4-GRUPO-9B\Actividad3\Logica\Logica.csproj">
+    <ProjectReference Include="..\Logica\Logica.csproj">
       <Project>{8a2e14ce-30b6-418e-a6ca-c46cbb2066fd}</Project>
       <Name>Logica</Name>
     </ProjectReference>

@@ -5,11 +5,11 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tp5_API_Grupo9B", "Tp5_API_Grupo9B\Tp5_API_Grupo9B.csproj", "{B9A2EF73-F16F-4AA7-AC59-BD7F72EB206E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logica", "..\Progra-3-ACTIVIDAD-4-GRUPO-9B\Actividad3\Logica\Logica.csproj", "{8A2E14CE-30B6-418E-A6CA-C46CBB2066FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logica", "Logica\Logica.csproj", "{8A2E14CE-30B6-418E-A6CA-C46CBB2066FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "..\Progra-3-ACTIVIDAD-4-GRUPO-9B\Actividad3\Entidades\Entidades.csproj", "{B12F7843-7EEA-48C7-979D-D33EC76CE7C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{B12F7843-7EEA-48C7-979D-D33EC76CE7C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "..\Progra-3-ACTIVIDAD-4-GRUPO-9B\Actividad3\ClassLibrary1\Datos.csproj", "{BA6D51CB-A032-4C1B-A9B9-7C59CA3E6980}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "ClassLibrary1\Datos.csproj", "{BA6D51CB-A032-4C1B-A9B9-7C59CA3E6980}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
