@@ -74,7 +74,6 @@ namespace Logica
 
             return lista;
         }
-
         public List<E_Articulo> ListarSinImg()
         {
             List<E_Articulo> lista = new List<E_Articulo>();
@@ -137,7 +136,6 @@ namespace Logica
 
             return lista;
         }
-
         public E_Articulo ListarPorID(int id)
         {
             E_Articulo aux = new E_Articulo();
@@ -185,12 +183,7 @@ namespace Logica
                 conexion.cerrarConexion();
             }
         }
-
-        
-       
-    
-
-    public List<E_Articulo> Filtro(string campo, string criterio, string filtro)
+        public List<E_Articulo> Filtro(string campo, string criterio, string filtro)
         {
 
             List<E_Articulo> listaArt = new List<E_Articulo>(); // instanciamos la lista
@@ -269,8 +262,6 @@ namespace Logica
 
                 return listaArt;
 
-
-
             }
             catch (Exception)
             {
@@ -279,7 +270,6 @@ namespace Logica
             }
             throw new NotImplementedException();
         }
-
         public void Agregar(E_Articulo articulo)
         {
             ConexionSql conexion = new ConexionSql();
@@ -287,15 +277,12 @@ namespace Logica
             try
             {
                 conexion.Consulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, Precio, IdCategoria, IdMarca) VALUES (@Codigo, @Nombre, @Descripcion, @Precio, @IdCategoria, @IdMarca)");
-                //conexion.Consulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, Precio) VALUES (@Codigo, @Nombre, @Descripcion, @Precio)");
-
                 conexion.SetParametros("@Codigo", articulo.Codigo);
                 conexion.SetParametros("@Nombre", articulo.Nombre);
                 conexion.SetParametros("@Descripcion", articulo.Descripcion);
                 conexion.SetParametros("@Precio", articulo.Precio);
                 conexion.SetParametros("@IdCategoria", articulo.Categoria.Id);
                 conexion.SetParametros("@IdMarca", articulo.Marca.Id);
-
                 conexion.EjecutarAccion();
             }
             catch (Exception ex)
@@ -308,7 +295,6 @@ namespace Logica
             }
 
         }
-
         public int UltimoId()
         {
 
@@ -356,7 +342,6 @@ namespace Logica
                 conexion.cerrarConexion();
             }
         }
-
         public void Modificar(E_Articulo articulo)
         {
 
@@ -387,48 +372,108 @@ namespace Logica
 
             }
         }
+        public bool ExisteId(int idArticulo)
+        {
+            ConexionSql conexion = new ConexionSql();
 
+            try
+            {
+                conexion.Consulta("SELECT COUNT(*) FROM ARTICULOS WHERE Id = @Id");
+                conexion.SetParametros("@Id", idArticulo);
+
+                object resultado = conexion.EjecutarEscalar();
+                int cantidad = Convert.ToInt32(resultado);
+                if (cantidad == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexion.cerrarConexion();
+            }
+        }
+        public List<E_Articulo> Buscar(string Nombre, string Codigo, int? IdMarca, int? IdCategoria)
+        {
+            List<E_Articulo> lista = new List<E_Articulo>();
+            ConexionSql conexion = new ConexionSql();
+
+            try
+            {
+                string consulta = "select a.Id, c.id as IdCategoria, m.id as IdMarca, a.Codigo, a.Nombre, a.Descripcion, a.Precio, c.Descripcion Categoria, m.Descripcion Marca from ARTICULOS a left join CATEGORIAS c on c.Id = a.IdCategoria left join MARCAS m on m.Id = a.IdMarca WHERE 1=1";
+
+                if (!string.IsNullOrEmpty(Nombre))
+                    consulta += " AND a.Nombre LIKE @Nombre";
+                if (!string.IsNullOrEmpty(Codigo))
+                    consulta += " AND a.Codigo LIKE @Codigo";
+                if (IdMarca.HasValue)
+                    consulta += " AND IdMarca = @IdMarca";
+                if (IdCategoria.HasValue)
+                    consulta += " AND IdCategoria = @IdCategoria";
+
+                conexion.Consulta(consulta);
+
+                if (!string.IsNullOrEmpty(Nombre))
+                    conexion.SetParametros("@Nombre", "%" + Nombre + "%");
+                if (!string.IsNullOrEmpty(Codigo))
+                    conexion.SetParametros("@Codigo", "%" + Codigo + "%");
+                if (IdMarca.HasValue)
+                    conexion.SetParametros("@IdMarca", IdMarca);
+                if (IdCategoria.HasValue)
+                    conexion.SetParametros("@IdCategoria", IdCategoria);
+
+                conexion.Ejecutar();
+                while (conexion.Lector.Read())
+                {
+                    E_Articulo aux = new E_Articulo();
+
+                    aux.IdArt = (int)conexion.Lector["Id"];
+                    aux.Codigo = (string)conexion.Lector["Codigo"];
+                    aux.Nombre = (string)conexion.Lector["Nombre"];
+                    aux.Descripcion = (string)conexion.Lector["Descripcion"];
+                    aux.Precio = (decimal)conexion.Lector["Precio"];
+
+                    aux.Marca = new E_Marca
+                    {
+                        Id = (int)conexion.Lector["IdMarca"],
+                        Descripcion = (string)conexion.Lector["Marca"]
+                    };
+
+                    aux.Categoria = new E_Categoria
+                    {
+                        Id = (int)conexion.Lector["IdCategoria"],
+                        Descripcion = (string)conexion.Lector["Categoria"]
+                    };
+
+                    L_Imagen logica = new L_Imagen();
+                    aux.ImagenUrl = logica.ListarImagenesPorID(aux.IdArt);
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexion.cerrarConexion();
+            }
+        }
 
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
+}
 

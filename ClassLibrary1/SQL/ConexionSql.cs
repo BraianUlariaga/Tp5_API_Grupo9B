@@ -25,15 +25,15 @@ namespace Logica.Logica
         {
             try
             {
-                conexion = new SqlConnection(@"Server=.\SQLEXPRESS;Database=PROMOS_DB;Integrated Security=True");
+                //conexion = new SqlConnection(@"Server=.\SQLEXPRESS;Database=PROMOS_DB;Integrated Security=True");
                 //Conexion para base de datos con declaracion de usuario especifico con login de sql
-               //conexion.ConnectionString = "Server=ULARIAGA-BRAIAN\\LOCALHOST; Database= PROMOS_DB; User Id= sa; Password=Super123.adm "; /// Brian
-               
+                conexion.ConnectionString = "Server=ULARIAGA-BRAIAN\\LOCALHOST; Database= PROMOS_DB; User Id= sa; Password=Super123.adm "; /// Brian
+
 
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Error al conectar a la base de datos: " + ex.Message);
+                throw ex;
             }
         }
 
@@ -42,8 +42,8 @@ namespace Logica.Logica
         {
             try
             {
-            comando.CommandType = System.Data.CommandType.Text; // Tipo de comando a ajecutar en el SQL, text(query), storeproceduire(SP)
-            comando.CommandText = consulta; //Pasamos la consulta por parametro
+                comando.CommandType = System.Data.CommandType.Text; // Tipo de comando a ajecutar en el SQL, text(query), storeproceduire(SP)
+                comando.CommandText = consulta; //Pasamos la consulta por parametro
 
             }
             catch (Exception ex)
@@ -122,12 +122,31 @@ namespace Logica.Logica
             }
         }
 
-            public void SetParametros(string nombre, object valor)
-            {
-                comando.Parameters.AddWithValue(nombre, valor);
-            }
-
-        
+        public void SetParametros(string nombre, object valor)
+        {
+            comando.Parameters.AddWithValue(nombre, valor);
         }
+
+        public object EjecutarEscalar()
+        {
+            comando.Connection = conexion;
+
+            try
+            {
+                conexion.Open();
+                object resultado = comando.ExecuteScalar();
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
     }
+}
 

@@ -26,7 +26,7 @@ namespace Logica.Logica
             catch (Exception ex)
             {
 
-                //MessageBox.Show(ex.ToString());
+                throw ex;
             }
         }
 
