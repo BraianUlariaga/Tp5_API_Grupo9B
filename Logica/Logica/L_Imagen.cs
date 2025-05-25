@@ -70,29 +70,8 @@ namespace Logica.Logica
 
             try
             {
-                conexion.Consulta("DELETE FROM IMAGENES WHERE Id = @IdArticulo");
+                conexion.Consulta("DELETE FROM IMAGENES WHERE IdArticulo = @IdArticulo");
                 conexion.SetParametros("@IdArticulo", idArticulo);
-                conexion.Ejecutar();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                conexion.cerrarConexion();
-            }
-        }
-
-
-        public void EliminarFisico(string Imagen)
-        {
-            ConexionSql conexion = new ConexionSql();
-
-            try
-            {
-                conexion.Consulta("DELETE FROM IMAGENES WHERE ImagenUrl = @Url");
-                conexion.SetParametros("@Url",Imagen );
                 conexion.Ejecutar();
             }
             catch (Exception ex)
@@ -114,8 +93,7 @@ namespace Logica.Logica
                 // Consulta para verificar si la URL existe en la base de datos
                 conexion.Consulta("SELECT COUNT(*) FROM IMAGENES WHERE ImagenUrl = @Url");
                 conexion.SetParametros("@Url", url);
-                conexion.Ejecutar();
-                int count = (int)conexion.Lector[0];
+                int count = (int)conexion.EjecutarEscalar();
                 return count > 0;
             }
             catch (Exception ex)
@@ -130,13 +108,6 @@ namespace Logica.Logica
                 conexion.cerrarConexion();
             }
         }
-
-
-
-
-
-
-
 
     }
 }
